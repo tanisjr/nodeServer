@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+<script>
+var url = "http://52.11.134.28:comment";
+$(document).ready(function()
+{
+    $("button").click(function()
+    {
+    	var myobj = {Name:$("#Name").val(),Comment:$("#Comment").val()};
+        jobj = JSON.stringify(myobj);
+        $("#json").text(jobj);
+        $.post(url,jobj,function(data,textStatus) 
+        {
+          $("#done").append(textStatus);
+          console.log("Finished!");
+        });
+    });
+});
+
+</script>
+</head>
+<body>
+
+<form id="commentForm" action="">
+  Name: <input type="text" name="Name" value="Mickey"><br>
+  comment: <input type="text" name="Comment" value="Hello"><br>
+</form>
+
+<button>Serialize form values</button>
+
+<div id="json"></div>
+<div id="done"></div>
+
+</body>
+</html>
