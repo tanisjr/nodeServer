@@ -8,19 +8,29 @@
 		$("#Submit").click(function()
 		{
 			var myobj = {Name:$("#Name").val(),Comment:$("#Comment").val()};
-			jobj = JSON.stringify(myobj);
+			var jobj = JSON.stringify(myobj);
 			$("#json").text(jobj);
 
-			var url = "http://52.11.134.28/comment";
-			$.post(url,jobj,function(data,textStatus) 
+			var url = "https://52.11.134.28/comment";
+			jQuery.ajax (
 			{
-				$("#success").append(textStatus);
+				url: url,
+				type: "POST",
+				data: jobj,
+				dataType: "json",
+				contentType: "application/json; charset=utf-8",
+				success: function()
+				{
+					$("#done").append("Success");
+				}
+				
 			});
+
 		});
 
 		$("#Show").click(function()
 		{
-			var url = "http://52.11.134.28/comments";
+			var url = "https://52.11.134.28/comment";
 			$.getJSON(url,function(data) {
 				var everything;
 				everything = "<ul>";
@@ -45,7 +55,7 @@
 	<button id="Show">Show Comments</button>
 
 	<div id="json"></div>
-	<div id="success"></div>
+	<div id="done"></div>
 	<div id="currentComments"></div>
 
 </body>
